@@ -24,3 +24,13 @@ export async function details(store: Store<RecipeType[]>, args: string[]) {
 
   console.log(`Name: ${matchingRecipe.name}`);
 }
+
+export async function create(store: Store<RecipeType[]>, args: string[]) {
+  const recipe = new Recipe(store);
+  const recipes = await recipe.readAll();
+  const name = args[0];
+  const id = recipes.length++;
+  const newRecipe = { id, name };
+  recipes.push(newRecipe);
+  console.log(`Name: ${newRecipe.name}`);
+}
